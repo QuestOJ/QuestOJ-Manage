@@ -5,15 +5,6 @@ if (!defined("load") || !isUserLogin()) {
     exit;
 }
 
-if ($appendFlag == 1) {
-    array_push($additional_footer, "");
-    array_push($additional_header, "<style>.table tbody tr td{vertical-align: middle;}</style>");
-    return true;
-}
-
-
-$db = new db();
-
 /**
  * 解析页面 ID
  */

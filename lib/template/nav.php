@@ -1,3 +1,10 @@
+<?php
+
+    if(!defined("load")){
+        header("Location:/403");
+        exit;
+    }    
+?>
 
 <body>
     <div class="container">

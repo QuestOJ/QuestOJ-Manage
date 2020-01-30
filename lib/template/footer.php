@@ -4,12 +4,6 @@
         header("Location:/403");
         exit;
     }
-
-    if($appendFlag == 1){
-        
-        return true;
-    }
-    
 ?>
 
     <div class="qoj-footer">
