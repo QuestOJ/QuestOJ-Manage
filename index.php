@@ -28,7 +28,7 @@
 
     define("load", true);
     define("PATH", dirname(__FILE__));
-    define("MININUM_FRAMRWORK_VERSION", "3.0");
+    define("MININUM_FRAMRWORK_VERSION", "3.1");
 
     if(!include_once("lib/init_load.php")){
         exit("Oops: Failed to execute init target - No such file");
