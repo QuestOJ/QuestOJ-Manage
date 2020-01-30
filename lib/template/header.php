@@ -3,14 +3,7 @@
     if(!defined("load")){
         header("Location:/403");
         exit;
-    }
-
-    if($appendFlag == 1){
-        
-        return true;
-    }
-
-    
+    }    
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +21,7 @@
     rel="stylesheet">
 
     <!-- QuestOJ Manage Platform -->
-    <link href="<?php echo __siteUrl; ?>static/css/style.css"
+    <link href="<?php echo __siteUrl; ?>static/css/style.css?ver=2020.01.30"
     rel="stylesheet">
 
     <!-- Fonts -->
@@ -48,11 +41,11 @@
     <script src="<?php echo __siteUrl; ?>static/js/chart.min.js"></script>
 
     <!-- Table -->
-    <link href="http://www.itxst.com/package/bootstrap-table-1.14.1/bootstrap-table-1.14.1/bootstrap-table.css" rel="stylesheet" />
-    <script src="http://www.itxst.com/package/bootstrap-table-1.14.1/bootstrap-table-1.14.1/bootstrap-table.js"></script>
+    <link href="<?php echo __siteUrl; ?>static/css/bootstrap-table.min.css" rel="stylesheet" />
+    <script src="<?php echo __siteUrl; ?>static/js/bootstrap-table.min.js"></script>
 
     <!-- Quest OJ Manage Platform -->
-    <script src="<?php echo __siteUrl; ?>static/js/style.js"></script>
+    <script src="<?php echo __siteUrl; ?>static/js/style.js?ver=2020.01.30"></script>
 
     <!-- Quest OJ -->
     <script src="<?= OJ_URL ?>/js/qoj.js?v=2019.12.28"></script>
