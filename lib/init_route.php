@@ -31,7 +31,7 @@
     $html->route("/service/log", "service_log", "服务日志", 0);
     $html->route("/service/log/page/(\d+)", "service_log", "服务日志", 0);
     $html->route("/service/log/info.(\d+)", "service_log_info", "服务日志详情", 0);
-    $html->route("/service/log/detail/(\d+)", "service_log_detail", NULL, 0);
+    $html->route("/service/log/detail", "service_log_detail", NULL, 1);
 
     $html->route("/user/list", "user_list", "用户列表", 0);
     $html->route("/user/list/page/(\d+)", "user_list", "用户列表", 0);

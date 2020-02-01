@@ -64,15 +64,26 @@ array_push($result, $tmpResult);
                     </button>
                 </div>
                 <div class="modal-body">
-                
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="button-submit">提交</button>
+                    <div class="mb-3">
+                        <ul class="nav nav-tabs" id="infoTab" role="tablist">
+                            <li class='nav-items'><a class='nav-link active' href='#stdout' id='tab-stdout' aria-controls='stdout' role='tab' data-toggle='tab'>stdout</a></li>
+                            <li class='nav-items'><a class='nav-link' href='#stderr' id='tab-stderr' aria-controls='stderr' role='tab' data-toggle='tab'>stderr</a></li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="stdout">
+                            <div class="card">
+                                <div class="card-body" style="white-space: pre-line;"><code id="code-stdout"></code></div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="stderr">
+                        <div class="card">
+                                <div class="card-body" style="white-space: pre-line;"><code id="code-stderr"></code></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <script type="text/javascript">
-                
-            </script>
         </div>
     </div>
 <div class="mb-2">
@@ -242,6 +253,48 @@ array_push($result, $tmpResult);
 </div>
 
 <script>
+    var handle
+    var stdout
+    var stderr
+
+    function fetchInfo(clientid, taskid, jobid, attempt) {
+        $.ajax({
+            url: "/service/log/detail",
+            data: {
+                clientid: clientid,
+                taskid: taskid,
+                jobid: jobid,
+                attempt: attempt,
+                stdout: stdout,
+                stderr: stderr,
+                token: '<?= frame::clientKey() ?>'
+            },
+            type: "POST",
+            dataType: "json",
+            success: function(data) {
+                data.stdout.forEach(function(res) {
+                    stdout = res[0]
+                    comments = HTMLEncode(atob(res[1]))
+
+                    console.log(comments)
+
+                    var html = document.getElementById("code-stdout").innerHTML;
+                    document.getElementById("code-stdout").innerHTML = html + comments;
+                })
+
+                data.stderr.forEach(function(res) {
+                    stderr = res[0]
+                    comments = HTMLEncode(atob(res[1]))
+
+                    console.log(comments)
+
+                    var html = document.getElementById("code-stderr").innerHTML;
+                    document.getElementById("code-stderr").innerHTML = html + comments;
+                })
+            }
+        })
+    }
+
     $('#infoModel').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget)
         
@@ -253,17 +306,26 @@ array_push($result, $tmpResult);
         var modal = $(this)
         modal.find('.modal-title').text('执行信息 '+clientid+'-'+taskid+'-'+jobid+'-'+attempt)
 
-        $.ajax({
-            url: "/service/log/detail",
-            data: {name: 'jenny'},
-            type: "POST",
-            dataType: "json",
-            success: function(data) {
-                // data = jQuery.parseJSON(data);  //dataType指明了返回数据为json类型，故不需要再反序列化
-                
-            }
-        });
+        stdout = 0
+        stderr = 0
 
+        document.getElementById("code-stdout").innerHTML = ""
+        document.getElementById("code-stderr").innerHTML = ""
+
+        $('#tab-stderr').removeClass("active")
+        $('#tab-stdout').addClass("active")
+        $('#stderr').removeClass("active")
+        $('#stdout').addClass("active")
+
+        fetchInfo(clientid, taskid, jobid, attempt)
+
+        handle = setInterval(function () {
+            fetchInfo(clientid, taskid, jobid, attempt)
+        }, 3000)
     });
+
+    $('#infoModel').on('hidden.bs.modal', function (event) {
+        clearInterval(handle)
+    })
 </script>
 <?= html::footer(); ?>
