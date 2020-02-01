@@ -262,7 +262,7 @@
                     array_push($links_arr, $links_row_arr);
                 }
 
-                echo '<td><a href = "#" data-toggle="modal" data-target="#editModel" data-id="'.$id.'" data-links=\''.json_encode($links_arr).'\'><span class="glyphicon glyphicon-pencil"></span>编辑</a></td>';
+                echo '<td><a href = "#" data-toggle="modal" data-target="#editModel" data-id="'.$id.'" data-links=\''.base64_encode(json_encode($links_arr)).'\'><span class="glyphicon glyphicon-pencil"></span>编辑</a></td>';
 
                 echo "</tr>";
             }
@@ -317,7 +317,7 @@
             var button = $(event.relatedTarget)
 
             var id = button.data('id')
-            var links = button.data('links')
+            var links = atob(button.data('links'))
 
             var modal = $(this)
             modal.find('.modal-title').text('修改比赛资料')
@@ -330,7 +330,7 @@
                 title: '标题'
             }];
             
-            var data = links
+            var data = JSON.parse(links)
             
             modal.find('#input-id').val(id)
             $('#table-blog-list').bootstrapTable({  
