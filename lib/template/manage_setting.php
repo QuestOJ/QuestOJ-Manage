@@ -3,83 +3,88 @@
     if(!defined("load") || !isUserLogin()){
         header("Location:/403");
         exit;
-    }
-
-
-    if($appendFlag == 1){
-        array_push($additional_header, "<style>.row-centered {text-align:center;}.col-centered {display:inline-block;float:none;text-align:left;margin-right:-4px;}</style>");
-        return true;
-    }
-    
-    
+    }    
 ?>
-        <div class="row row-centered">
-            <div class="col-md-5 col-centered">
-                <div>
-                    <?php
-                        if(frame::issetSession("status")){
-                            $status = frame::readSession("status");
-                            
+<?= html::header(); ?>
 
-                            echo "<div class=\"alert alert-danger alert-dismissible\" role=\"alert\">
-                                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>";
-                            
-                            echo "<strong>修改失败: </strong>";
+<h2 class="page-header">系统设置</h2>
+<form id="form-setting" class="form-horizontal" method="post">
+  <div id="div-sitename" class="form-group">
+    <label for="input-sitename" class="col-sm-2 control-label">站点名称</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control" id="input-sitename" name="sitename" value="<?= __siteName ?>"/>
+      <span class="help-block" id="help-sitename"></span>
+    </div>
+  </div>
+  <div id="div-siteurl" class="form-group">
+    <label for="input-siteurl" class="col-sm-2 control-label">站点地址</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control" id="input-siteurl" name="siteurl" value="<?= __siteUrl ?>"/>
+      <span class="help-block" id="help-siteurl"></span>
+    </div>
+  </div>
+  <div id="div-siteshortname" class="form-group">
+    <label for="input-siteshortname" class="col-sm-2 control-label">站点简称</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control" id="input-siteshortname" name="siteshortname" value="<?= __siteShortName ?>"/>
+      <span class="help-block" id="help-siteshortname"></span>
+    </div>
+  </div>
+  <div id="div-logintime" class="form-group">
+    <label for="input-logintime" class="col-sm-2 control-label">登录有效期(秒)</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control" id="input-logintime" name="logintime" value="<?= __loginTime ?>"/>
+      <span class="help-block" id="help-logintime"></span>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-3">
+      <button type="submit" id="button-submit" class="btn btn-secondary">提交</button>
+    </div>
+  </div>
+</form>
 
-                            if($status == "empty")
-                                echo "表单不能为空";
-                            else if($status == "logintime")
-                                echo "有效登录时间必须为数字";
-                            else if($status == "short") {
-                                echo "有效登录时间必须大于 3600 秒";
-                            }
-                            echo "</div>";
-                            
-                            
+<script type="text/javascript">
+function validateSettingPost() {
+	var ok = true;
+	ok &= getFormErrorAndShowHelp('sitename', validateSiteName);
+	ok &= getFormErrorAndShowHelp('siteurl', validateSiteURL);
+  ok &= getFormErrorAndShowHelp('siteshortname', validateSiteShortName);
+  ok &= getFormErrorAndShowHelp('logintime', validateLoginTime);
+	return ok;
+}
 
-                            frame::deleteSession("status");
-                        }
-                    ?>
-                </div>
+function submitSettingPost() {
+	if (!validateSettingPost()) {
+		return false;
+	}
+	
+	$.post('/manage/setting/submit', {
+		token : "<?= frame::clientKey() ?>",
+		sitename : $('#input-sitename').val(),
+    siteurl : $('#input-siteurl').val(),
+    siteshortname : $('#input-siteshortname').val(),
+    logintime : $('#input-logintime').val(),
+	}, function(msg) {
+		if (msg == 'ok') {
+			location.reload();
+		} else if (msg == 'expired') {
+			$('#div-sitename').addClass('has-error');
+			$('#help-sitename').html('页面会话已过期。');
+		} else {
+			$('#div-sitename').addClass('has-error');
+			$('#help-sitename').html('未知错误。');
+		}
+	});
+	return true;
+}
 
-                <div style="padding:10px 0px 30px 0px">
-                    <h3>
-                        <strong>
-                            <p class="text-center">系统设置</p>
-                        </strong>
-                    </h3>
-                </div>
+$(document).ready(function() {
+	$('#form-setting').submit(function(e) {
+		e.preventDefault();
+		submitSettingPost();
+	});
+});
 
-                <form class="form-horizontal" action="/manage/setting/submit" method="POST">
-                    <div class="form-group">
-                        <label for="inputName" class="col-sm-4 control-label">站点名称</label>
-                        <div class="col-sm-8">
-                        <input type="text" class="form-control" id="inputText" name="siteName" type="text" value="<?php echo __siteName; ?>" placeholder="Site Name">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputUrl" class="col-sm-4 control-label">站点URL</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="inputText" name="siteURL" value="<?php echo __siteUrl; ?>" placeholder="Site URL">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputShortname" class="col-sm-4 control-label">站点简称</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="inputText" name="siteShortName" value="<?php echo __siteShortName ?>" placeholder="Site Short Name">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputTime" class="col-sm-4 control-label">登录有效时间</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="inputText" name="loginTime" value="<?php echo __loginTime ?>" placeholder="Login Effective time">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-4 col-sm-8">
-                            <button type="submit" class="btn btn-default">提交</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+</script>
+<?= html::footer(); ?>

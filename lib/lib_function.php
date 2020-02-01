@@ -50,8 +50,7 @@
      */
 
     function updateSystemSetting($name, $value){
-        $db = new db();
-        $db->query("UPDATE `{$db->tablePrefix}_system` SET `value`='$value' where `name` = '$name'");
+        db::query("local", "UPDATE `".MYSQL_TABLE_PREFIX."_system` SET `value`='$value' where `name` = '$name'");
     }
      
     /**

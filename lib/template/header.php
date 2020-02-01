@@ -45,7 +45,7 @@
     <script src="<?php echo __siteUrl; ?>static/js/bootstrap-table.min.js"></script>
 
     <!-- Quest OJ Manage Platform -->
-    <script src="<?php echo __siteUrl; ?>static/js/style.js?ver=2020.01.30"></script>
+    <script src="<?php echo __siteUrl; ?>static/js/style.js?ver=2020.02.01"></script>
 
     <!-- Quest OJ -->
     <script src="<?= OJ_URL ?>/js/qoj.js?v=2019.12.28"></script>
