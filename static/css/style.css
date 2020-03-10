@@ -31,3 +31,39 @@ img{
 }
 
 body {font-family: 'Noto Sans SC', sans-serif;}
+
+.user-gray {
+    color: gray !important;
+}
+
+.user-brown {
+    color: #804000 !important;
+}
+
+.user-green {
+    color: green !important;
+}
+
+.user-cyan {
+    color: #03A89E !important;
+}
+
+.user-blue {
+    color: blue !important;
+}
+
+.user-violet {
+    color: #a0a !important;
+}
+
+.user-orange {
+    color: #FF8C00 !important;
+}
+
+.user-red {
+    color: red !important;
+}
+
+.user-black {
+    color: black !important;
+}
