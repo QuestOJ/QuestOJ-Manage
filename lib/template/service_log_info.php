@@ -274,7 +274,7 @@ array_push($result, $tmpResult);
             success: function(data) {
                 data.stdout.forEach(function(res) {
                     stdout = res[0]
-                    comments = HTMLEncode(atob(res[1]))
+                    comments = decodeURIComponent(escape(window.atob(res[1])))
 
                     console.log(comments)
 
@@ -284,7 +284,7 @@ array_push($result, $tmpResult);
 
                 data.stderr.forEach(function(res) {
                     stderr = res[0]
-                    comments = HTMLEncode(atob(res[1]))
+                    comments = decodeURIComponent(escape(window.atob(res[1])))
 
                     console.log(comments)
 
