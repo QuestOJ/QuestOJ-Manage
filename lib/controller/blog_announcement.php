@@ -17,9 +17,11 @@
         exit();
     }
 
-    if (!$post = getPostInfo($id)) {
+    if (!wp::checkPostStatus($id)) {
         exit("id");
     }
+    
+    $post = getPostInfo($id);
 
     if ($action == "add") {
         log::writelog(2, 3, 307, "新增公告 {$post["title"]}");

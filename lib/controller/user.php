@@ -84,5 +84,6 @@
         exit("");
     }
 
+    wp::updateUser(getUserInfo($username));
     exit("ok");
 ?>

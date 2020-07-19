@@ -285,7 +285,7 @@
                 $blogs = getPostInfo($id);
 
                 $title = $blogs["title"];
-                $poster = $blogs["poster"];
+                $poster = $blogs["username"];
                 $post_time = $blogs["post_time"];
 
                 echo "<tr class=\"text-center\">";

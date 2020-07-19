@@ -23,9 +23,11 @@
 		exit("title");
 	}
 
-	if (!$post = getPostInfo($blog_id)) {
+	if (!wp::checkPostStatus($blog_id)) {
 		exit("id");
 	}
+
+	$post = getPostInfo($blog_id);
 
 	$str = DB::selectFirst("oj", "select * from contests where id='${contest_id}'");
 	$all_config = json_decode($str['extra_config'], true);

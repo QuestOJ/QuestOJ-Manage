@@ -100,7 +100,7 @@
      */
 
     function getPostInfo($id) {
-        return db::selectFirst("oj", "SELECT * FROM `blogs` where id = '$id'");
+        return db::selectFirst("oj", "SELECT blogs.*, user_info.username from blogs, user_info where blogs.id = '$id' and blogs.poster = user_info.blog_id");
     }
 
     function getProblemInfo($id) {
