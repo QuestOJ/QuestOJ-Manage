@@ -348,7 +348,7 @@
                 echo "<td>#{$id}</td>";
                 echo "<td>{$name}</td>";
                 echo "<td>{$comments}</td>";
-                echo "<td><a href=\"/user/list?gid={$id}\" target=\"_blank\">{$cnt}</a></td>";
+                echo "<td><a href=\"/user/list?group={$id}\" target=\"_blank\">{$cnt}</a></td>";
 
                 if ($id == 0) {
                     echo '<td><a href = "#" data-toggle="modal" data-target="#editModel" data-id="'.$id.'" data-groupname="'.$name.'" data-comments="'.$comments.'" "><span class="glyphicon glyphicon-pencil"></span>编辑</a> &nbsp; <span class="glyphicon glyphicon-remove">删除</td>';
