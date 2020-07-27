@@ -72,7 +72,7 @@
             $first = true;
         } else {
             $sql = $sql." and userdefine = '$search_group'";
-            $searchRedirect = $searchRedirect."&group=".urlencode($search);
+            $searchRedirect = $searchRedirect."&group=".urlencode($search_group);
         }        
     } else {
         $search_group = "";
