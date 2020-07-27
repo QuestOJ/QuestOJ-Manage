@@ -57,6 +57,9 @@
     $html->route("/submission/custom", "submission_custom", "自定义评测", 0);
     $html->route("/submission/custom/page/(\d+)", "submission_custom", "自定义评测", 0);
 
+    $html->route("/tools/zan", "tools_zan", "点赞管理", 0);
+    $html->route("/tools/zan/page/(\d+)", "tools_zan", "点赞管理", 0);
+
     $html->checkRoute();
     $html->printHTML();
 

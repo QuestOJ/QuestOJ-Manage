@@ -107,6 +107,10 @@
         return db::selectFirst("oj", "SELECT * FROM `problems` where id = '$id'");
     }
 
+    function getContestInfo($id) {
+        return db::selectFirst("oj", "SELECT * FROM `contests` where id = '$id'");
+    }
+
     function validateUsername($username) {
         return is_string($username) && preg_match('/^[a-zA-Z0-9_]{1,20}$/', $username);
     }
