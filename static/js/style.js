@@ -52,6 +52,26 @@ function validateLoginTime(str) {
     }
 }
 
+function validateIP(str) {
+	if (str.length == 0) {
+		return '';
+	} else if (! /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/.test(str)) {
+		return 'IP格式不合法';
+	} else {
+		return '';
+	}
+}
+
+function validateJudgername(str) {
+	if (str.length == 0) {
+		return '评测机名不能为空。';
+	} else if (! /^[a-zA-Z0-9_]+$/.test(str)) {
+		return '评测机名应只包含大小写英文字母、数字和下划线。';
+	} else {
+		return '';
+	}
+}
+
 function IsURL(str_url){
     var strRegex = '^((https|http)?://)'
             + '(([0-9]{1,3}.){3}[0-9]{1,3}'

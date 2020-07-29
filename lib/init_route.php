@@ -53,9 +53,11 @@
 
     $html->route("/submission/fail", "submission_fail", "失败的评测", 0);
     $html->route("/submission/fail/page/(\d+)", "submission_fail", "失败的评测", 0);
-
     $html->route("/submission/custom", "submission_custom", "自定义评测", 0);
     $html->route("/submission/custom/page/(\d+)", "submission_custom", "自定义评测", 0);
+    $html->route("/submission/server", "submission_server", "评测机管理", 0);
+    $html->route("/submission/server/page/(\d+)", "submission_server", "评测机管理", 0);
+    $html->route("/submission/server/edit", "submission_server", NULL, 1);
 
     $html->route("/tools/zan", "tools_zan", "点赞管理", 0);
     $html->route("/tools/zan/page/(\d+)", "tools_zan", "点赞管理", 0);

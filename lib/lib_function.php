@@ -111,6 +111,11 @@
         return db::selectFirst("oj", "SELECT * FROM `contests` where id = '$id'");
     }
 
+    function getJudgerInfo($judgername) {
+        $judgername = db::escape($judgername);
+        return db::selectFirst("oj", "SELECT * FROM `judger_info` where judger_name = '{$judgername}'");
+    }
+
     function validateUsername($username) {
         return is_string($username) && preg_match('/^[a-zA-Z0-9_]{1,20}$/', $username);
     }
@@ -121,6 +126,10 @@
     
     function validateEmail($email) {
         return is_string($email) && strlen($email) <= 50 && preg_match('/^(.+)@(.+)$/', $email);
+    }
+
+    function validateIP($ip) {
+        return is_string($ip) && ($ip == "" || preg_match('/^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/', $ip));
     }
 
     /**
