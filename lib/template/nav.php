@@ -51,7 +51,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="/tools/zan">点赞管理</a>
-                            <a class="dropdown-item" href="/tools/problem">增删试题</a>
+                            <a class="dropdown-item" href="/tools/cli">命令行工具</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">

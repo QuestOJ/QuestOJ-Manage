@@ -62,6 +62,9 @@
     $html->route("/tools/zan", "tools_zan", "点赞管理", 0);
     $html->route("/tools/zan/page/(\d+)", "tools_zan", "点赞管理", 0);
 
+    $html->route("/tools/cli", "tools_cli", "命令行工具", 0);
+    $html->route("/tools/cli/submit", "tools_cli", NULL, 1);
+
     $html->checkRoute();
     $html->printHTML();
 

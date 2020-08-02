@@ -116,6 +116,10 @@
         return db::selectFirst("oj", "SELECT * FROM `judger_info` where judger_name = '{$judgername}'");
     }
 
+    function getClientInfo($id) {
+        return db::selectFirst("local", "SELECT * FROM `manage_client` where id = '$id'");
+    }
+
     function validateUsername($username) {
         return is_string($username) && preg_match('/^[a-zA-Z0-9_]{1,20}$/', $username);
     }

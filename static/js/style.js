@@ -24,6 +24,16 @@ function validateBlogID(str) {
     }
 }
 
+function validateProblemID(str) {
+	if (str.length == 0) {
+		return '试题ID不能为空。';
+	} else if (/\D/.test(str)) {
+		return '试题ID应只包含0~9的数字。';
+	} else {
+        return '';
+    }
+}
+
 function validateSiteName(str) {
 	if (str.length == 0) {
 		return '站点名称不能为空。';
